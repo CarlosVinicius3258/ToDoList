@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
+
 import styles from './styles'
 
  const Task = (props) =>{
@@ -10,7 +11,7 @@ import styles from './styles'
                 <Text style={styles.itemText}>{props.text}</Text>
             </View>
             <View style={styles.circular}>
-            </View>
+        </View>
            
         </View>
     )
