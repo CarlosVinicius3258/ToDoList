@@ -1,20 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import Task from './components/task/Task'
-import AddTask from './components/AddTask/AddTask'
+
 
 export default function App() {
+  const [task, setTask] = useState('');
+  const [taskItems, setTaskItems] = useState([]);
 
+const handleAddTask = () => {
+  Keyboard.dismiss() // It makes the keyboard dismiss when the add buttom is clicked
+  setTaskItems([...taskItems, task]);
+  setTask(null); // It erases the state function after add the task in the array
+}
+
+const handleCheckTask = (index) => {
+  let taskItemsCopy = [...taskItems];
+  taskItemsCopy.splice(index, 1);
+  setTaskItems(taskItemsCopy);
+}
+  
   return (
     <View style={styles.container}> 
       <View style={styles.taskWrapper}> 
         <Text style={styles.sectionTitle}> Todays' Tasks</Text>
         <View style={styles.items}>
-            <Task text="Hey man"/>
-            <Task text = "Second Item"/>
-            <Task/>
-            <Task/>
+            {taskItems.map((item, index) => (
+              <TouchableOpacity key = {index} onPress= {() => handleCheckTask(index)}>
+                <Task text={item} />
+              </TouchableOpacity>
+              
+            ))}
         </View>
       </View>
 
@@ -22,9 +38,12 @@ export default function App() {
                 style={styles.writeTaskWrapper}
                 behavior = {Platform.OS === 'ios'?'padding':'height'}
             >   
-               <TextInput style={styles.input} placeholder="Write a task..."></TextInput>
+               <TextInput style={styles.input} value={task} onChangeText = {text => setTask(text)} placeholder="Write a task..."></TextInput>
+     
                <TouchableOpacity 
-                style={styles.addWrapper}>
+                style={styles.addWrapper}
+                onPress={handleAddTask}
+                >
                     
                     <Text style={styles.addText}>+</Text>
                 
