@@ -1,15 +1,28 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native'
-
-const InputTodo = () => {
+import { TodoListController } from '../TodoList/controller/TodoListController'
+import uuid from 'react-native-uuid'
+const InputTodo = (props) => {
     const [value, setValue] = useState('')
+
     const handleTextChange = (value) => {
         setValue(value)
-    }   
+    }  
+
+    const createTodoItem = (id, descr, checked) => {
+        console.log(id)
+        const newTodo = {
+            id,
+            descr,
+            checked,
+        }
+        props.setData(prev => [...props.data, newTodo]);
+    }
+    
     return (
         <View style={styles.container}>
-            <TextInput style={styles.input} value={'Value'} onChangeText={handleTextChange}/>
-            <TouchableHighlight style={styles.add}>
+            <TextInput style={styles.input} value={value} onChangeText={value => handleTextChange(value)}/>
+            <TouchableHighlight style={styles.add} onPress={() => createTodoItem(uuid.v4(),value, false)}>
                 <Text style={styles.addText}>+</Text>
             </TouchableHighlight>
         </View>

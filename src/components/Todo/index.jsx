@@ -2,13 +2,29 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
 
 const Todo = (props) => {
-    const {descr, checked} = props;
+    const {descr, checked, id, data, setData} = props;
+
+    const handleClickChecker = () => {
+        let toDeleteItem = {}
+        let index = []
+        let newData = []
+        data.map(item=>{
+            if (item.id === id){
+                toDeleteItem = item
+            }
+        })
+        index = data.indexOf(toDeleteItem)
+        newData = data;
+        newData[index].checked = !newData[index].checked
+        console.log(newData);
+        setData([...newData]);
+    }
     return (
         <View>
             <View style={styles.container}>
-            <TextInput style={styles.descr} value={'Descr'}/>
-            <TouchableHighlight style={styles.checker}>
-                <Text></Text>
+            <TextInput style={!checked?styles.descr:styles.descrChecked} value={descr}/>
+            <TouchableHighlight style={styles.checker} onPress={handleClickChecker}>
+                <Text style={styles.checkerText}>{checked?'X':''}</Text>
             </TouchableHighlight>
             
             </View>
@@ -33,12 +49,22 @@ const styles = StyleSheet.create({
         borderWidth: 1.5,
         borderRadius: 3,
         marginRight: 10,
-        paddingHorizontal: 12,
+        paddingTop: 5,
+        width: 35,
+        height: 35,
 
+    },
+    checkerText: {
+        textAlign: 'center'
     },
     descr: {
         marginLeft: 5,
         textAlign: 'justify',
+    },
+    descrChecked: {
+        marginLeft: 5,
+        textAlign: 'justify',
+        textDecorationLine: 'line-through'
     },
     line: {
         marginTop: 3,
