@@ -7,8 +7,11 @@ import {
   TouchableHighlight,
 } from "react-native";
 import uuid from "react-native-uuid";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../store/todos";
+
 const InputTodo = (props) => {
-  const { addTodo } = props;
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const handleTextChange = (value) => {
     setValue(value);
@@ -24,11 +27,13 @@ const InputTodo = (props) => {
       <TouchableHighlight
         style={styles.add}
         onPress={() => {
-          addTodo({
-            id: uuid.v4(),
-            descr: value,
-            checked: false,
-          });
+          dispatch(
+            addTodo({
+              id: uuid.v4(),
+              descr: value,
+              checked: false,
+            })
+          );
         }}
       >
         <Text style={styles.addText}>+</Text>

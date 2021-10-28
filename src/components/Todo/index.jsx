@@ -6,17 +6,20 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native";
-import useTodoList from "../../hooks/useTodoList";
+import { useDispatch } from "react-redux";
+import { updateTodo, removeTodo } from "../../store/todos";
 
 const Todo = (props) => {
-  const { descr, checked, id, removeTodo, updateTodo } = props;
-  //const [, , removeTodo, updateTodo] = useTodoList();
+  const { descr, checked, id, todos } = props;
+  const dispatch = useDispatch();
   return (
     <View>
       <View style={styles.container}>
         <TouchableHighlight
           style={styles.descrContainer}
-          onPress={() => updateTodo(id)}
+          onPress={() => {
+            dispatch(updateTodo(id, todos));
+          }}
         >
           <Text style={!checked ? styles.descr : styles.descrChecked}>
             {descr}
@@ -25,7 +28,7 @@ const Todo = (props) => {
         <TouchableHighlight
           style={styles.deleteContainer}
           onPress={() => {
-            removeTodo(id);
+            dispatch(removeTodo(id));
           }}
         >
           <Text style={styles.deleteText}>X</Text>

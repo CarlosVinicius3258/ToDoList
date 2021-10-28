@@ -1,24 +1,21 @@
 import React, { useEffect, useState, useReducer } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import InputTodo from "../InputTodo";
+import { useSelector } from "react-redux";
 import Todo from "../Todo";
-import useTodoListController from "../../hooks/useTodoListController";
 const TodoList = () => {
-  const { state, addTodo, removeTodo, updateTodo } = useTodoListController();
-  console.log(state);
+  const { todos } = useSelector((state) => state);
   return (
     <View style={styles.container}>
-      <InputTodo addTodo={addTodo} />
-      {state.map((todo) => {
+      <InputTodo />
+      {todos.map((todo) => {
         return (
           <Todo
             key={todo.id}
             id={todo.id}
-            state={state}
             descr={todo.descr}
-            removeTodo={removeTodo}
-            updateTodo={updateTodo}
             checked={todo.checked}
+            todos={todos}
           />
         );
       })}
