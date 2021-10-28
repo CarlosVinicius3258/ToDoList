@@ -1,34 +1,36 @@
-import React,{useEffect, useState} from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import InputTodo from '../InputTodo'
-import Todo from '../Todo'
-import {TodoListController} from './controller/TodoListController'
-const TodoList = () =>  {
-    
-    const [todos, setTodos] = useState([])
-    const [data,setData] = useState([])
-
-    useEffect(() => {
-        setTodos([...data])
-    }, [data])
-    console.log("todos: ", todos)
-    return (
-        <View style={styles.container}>
-            <InputTodo data={data} setData={setData} />
-            {todos.map(todo => {
-                console.log
-                return <Todo key={todo.id} id={todo.id} data={data} setData={setData} descr={todo.descr} checked={todo.checked}/>
-            })}
-
-        </View>
-    )
-}
+import React, { useEffect, useState, useReducer } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import InputTodo from "../InputTodo";
+import Todo from "../Todo";
+import useTodoListController from "../../hooks/useTodoListController";
+const TodoList = () => {
+  const { state, addTodo, removeTodo, updateTodo } = useTodoListController();
+  console.log(state);
+  return (
+    <View style={styles.container}>
+      <InputTodo addTodo={addTodo} />
+      {state.map((todo) => {
+        return (
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            state={state}
+            descr={todo.descr}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+            checked={todo.checked}
+          />
+        );
+      })}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 60,
-        marginHorizontal: 4
-    }
-})
+  container: {
+    marginTop: 60,
+    marginHorizontal: 4,
+  },
+});
 
 export default TodoList;

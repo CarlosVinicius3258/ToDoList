@@ -1,74 +1,76 @@
-import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native'
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  TextInput,
+} from "react-native";
+import useTodoList from "../../hooks/useTodoList";
 
 const Todo = (props) => {
-    const {descr, checked, id, data, setData} = props;
+  const { descr, checked, id, removeTodo, updateTodo } = props;
+  //const [, , removeTodo, updateTodo] = useTodoList();
+  return (
+    <View>
+      <View style={styles.container}>
+        <TouchableHighlight
+          style={styles.descrContainer}
+          onPress={() => updateTodo(id)}
+        >
+          <Text style={!checked ? styles.descr : styles.descrChecked}>
+            {descr}
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.deleteContainer}
+          onPress={() => {
+            removeTodo(id);
+          }}
+        >
+          <Text style={styles.deleteText}>X</Text>
+        </TouchableHighlight>
+      </View>
+      <View style={styles.line}></View>
+    </View>
+  );
+};
 
-    const handleClickChecker = () => {
-        let toDeleteItem = {}
-        let index = []
-        let newData = []
-        data.map(item=>{
-            if (item.id === id){
-                toDeleteItem = item
-            }
-        })
-        index = data.indexOf(toDeleteItem)
-        newData = data;
-        newData[index].checked = !newData[index].checked
-        console.log(newData);
-        setData([...newData]);
-    }
-    return (
-        <View>
-            <View style={styles.container}>
-            <TextInput style={!checked?styles.descr:styles.descrChecked} value={descr}/>
-            <TouchableHighlight style={styles.checker} onPress={handleClickChecker}>
-                <Text style={styles.checkerText}>{checked?'X':''}</Text>
-            </TouchableHighlight>
-            
-            </View>
-            <View style={styles.line}></View>
-        </View>
-        
-        
-    )
-}
-
-export default Todo
+export default Todo;
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginVertical: 10,
-        width: '100%',
-        padding: 10,
-    },
-    checker: {
-        borderWidth: 1.5,
-        borderRadius: 3,
-        marginRight: 10,
-        paddingTop: 5,
-        width: 35,
-        height: 35,
-
-    },
-    checkerText: {
-        textAlign: 'center'
-    },
-    descr: {
-        marginLeft: 5,
-        textAlign: 'justify',
-    },
-    descrChecked: {
-        marginLeft: 5,
-        textAlign: 'justify',
-        textDecorationLine: 'line-through'
-    },
-    line: {
-        marginTop: 3,
-        borderWidth:0.3,
-        borderColor: 'gray'
-    }
-})
+  container: {
+    flexDirection: "row",
+    marginVertical: 10,
+    width: "100%",
+    padding: 10,
+  },
+  descrContainer: {
+    width: "80%",
+  },
+  descr: {
+    marginLeft: 5,
+    textAlign: "justify",
+    flexWrap: "wrap",
+    fontSize: 15,
+  },
+  descrChecked: {
+    marginLeft: 5,
+    textAlign: "justify",
+    textDecorationLine: "line-through",
+  },
+  deleteContainer: {
+    width: "20%",
+  },
+  deleteText: {
+    textAlign: "center",
+    paddingTop: 5,
+    color: "red",
+    fontSize: 20,
+  },
+  line: {
+    marginTop: 3,
+    borderWidth: 0.3,
+    borderColor: "gray",
+  },
+});
