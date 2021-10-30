@@ -5,11 +5,16 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest",
+    "test:watch": "yarn test -- --watch"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "babel-jest": "^27.3.1",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
+    "jest": "^27.3.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",

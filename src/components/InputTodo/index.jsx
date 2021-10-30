@@ -9,6 +9,7 @@ import {
 import uuid from "react-native-uuid";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../../store/todos";
+import { showAddTodoMessage, hideAddTodoMessage } from "../../store/layout";
 
 const InputTodo = (props) => {
   const dispatch = useDispatch();
@@ -34,6 +35,11 @@ const InputTodo = (props) => {
               checked: false,
             })
           );
+          dispatch(showAddTodoMessage());
+          setTimeout(() => {
+            dispatch(hideAddTodoMessage());
+          }, 1000);
+          setValue("");
         }}
       >
         <Text style={styles.addText}>+</Text>

@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Dimensions,
+  Alert,
+} from "react-native";
 import TodoList from "./src/components/TodoList";
 import { Provider } from "react-redux";
 import store from "./src/store";

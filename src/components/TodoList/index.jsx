@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useReducer } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Alert } from "react-native";
 import InputTodo from "../InputTodo";
 import { useSelector } from "react-redux";
 import Todo from "../Todo";
 const TodoList = () => {
   const { todos } = useSelector((state) => state);
+  console.log(todos);
+  const { showAddTodoMessage } = useSelector((state) => state.layout);
+  console.log(showAddTodoMessage);
   return (
     <View style={styles.container}>
+      {showAddTodoMessage && Alert.alert("Item Adicionado!")}
       <InputTodo />
       {todos.map((todo) => {
         return (
