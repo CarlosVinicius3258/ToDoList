@@ -13,7 +13,7 @@
     - configStore
 - **Teste**
   - Jest
-- **API** [link para repo da API]
+- **API** [ [listTodo-api](https://github.com/CarlosVinicius3258/todoList-api) ]
   - Express
   - CORS
   - MongoDB
