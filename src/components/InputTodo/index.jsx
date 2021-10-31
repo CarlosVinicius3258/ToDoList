@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import uuid from "react-native-uuid";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../store/todos";
-import { showAddTodoMessage, hideAddTodoMessage } from "../../store/layout";
+import { addTodo } from "../../store/ducks/todos";
+import { showAddTodoMessage, hideAddTodoMessage } from "../../store/ducks/layout";
 
 const InputTodo = (props) => {
   const dispatch = useDispatch();

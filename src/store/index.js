@@ -1,10 +1,7 @@
-import { createStore, combineReducers } from "redux";
-import todosReducer from "./todos";
-import layoutReducer from "./layout";
+import { configureStore } from "@reduxjs/toolkit";
+import todosReducer from "./ducks/todos/index";
+import layoutReducer from "./ducks/layout/index";
 
-const rootReducer = combineReducers({
-  todos: todosReducer,
-  layout: layoutReducer,
+export default configureStore({
+  reducer: { todos: todosReducer, layout: layoutReducer },
 });
-
-export default createStore(rootReducer);

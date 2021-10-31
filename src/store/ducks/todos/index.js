@@ -2,6 +2,7 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 //Action Creator
 export const addTodo = createAction("ADD_TODO");
+export const addTodos = createAction("ADD_TODOS");
 export const updateTodo = createAction("UPDATE_TODO");
 export const removeTodo = createAction("REMOVE_TODO");
 
@@ -11,8 +12,10 @@ const reducer = createReducer([], {
   [addTodo.type]: (state, action) => {
     state.push(action.payload);
   },
+  [addTodos.type]: (state, action) => state.push([...action.payload]),
 
-  //updateTodo Handler
+  //updateTodo
+
   [updateTodo.type]: (state, action) => {
     const newArray = state.map((todo) => {
       if (todo.id === action.payload) {
