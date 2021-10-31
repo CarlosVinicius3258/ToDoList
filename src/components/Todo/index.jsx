@@ -7,8 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { updateTodo, removeTodo } from "../../store/ducks/todos";
-
+import { removeTodoFetch, updateTodoFetch } from "../../store/fetchActions";
 const Todo = (props) => {
   const { descr, checked, id } = props;
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Todo = (props) => {
         <TouchableHighlight
           style={styles.descrContainer}
           onPress={() => {
-            dispatch(updateTodo(id));
+            dispatch(updateTodoFetch(id));
           }}
         >
           <Text style={!checked ? styles.descr : styles.descrChecked}>
@@ -28,7 +27,7 @@ const Todo = (props) => {
         <TouchableHighlight
           style={styles.deleteContainer}
           onPress={() => {
-            dispatch(removeTodo(id));
+            dispatch(removeTodoFetch(id));
           }}
         >
           <Text style={styles.deleteText}>X</Text>

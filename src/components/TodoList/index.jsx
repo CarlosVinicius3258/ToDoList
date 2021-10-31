@@ -6,7 +6,6 @@ import Todo from "../Todo";
 import { getAllTodos } from "../../store/fetchActions";
 const TodoList = () => {
   const { todos } = useSelector((state) => state);
-  console.log("todos: ", todos);
   const dispatch = useDispatch();
   const { showAddTodoMessage } = useSelector((state) => state.layout);
   useEffect(() => {
@@ -18,10 +17,11 @@ const TodoList = () => {
       {showAddTodoMessage && Alert.alert("Item Adicionado!")}
       <InputTodo />
       {todos.map((todo) => {
+        console.log(todo.id, todo._id);
         return (
           <Todo
             key={todo.id}
-            id={todo.id}
+            id={todo._id}
             descr={todo.descr}
             checked={todo.checked}
           />

@@ -29,7 +29,8 @@ const reducer = createReducer([], {
 
   //removeTodo Handler
   [removeTodo.type]: (state, action) => {
-    return state.filter((todo) => todo.id !== action.payload);
+    const newArray = state.filter((todo) => todo._id !== action.payload);
+    return [...newArray];
   },
 });
 
