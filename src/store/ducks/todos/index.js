@@ -12,7 +12,7 @@ const reducer = createReducer([], {
   [addTodo.type]: (state, action) => {
     state.push(action.payload);
   },
-  [addTodos.type]: (state, action) => state.push([...action.payload]),
+  [addTodos.type]: (state, action) => [...action.payload],
 
   //updateTodo
 

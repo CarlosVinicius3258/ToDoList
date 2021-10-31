@@ -8,8 +8,11 @@ import {
 } from "react-native";
 import uuid from "react-native-uuid";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../store/ducks/todos";
-import { showAddTodoMessage, hideAddTodoMessage } from "../../store/ducks/layout";
+import {
+  showAddTodoMessage,
+  hideAddTodoMessage,
+} from "../../store/ducks/layout";
+import { addTodoFetch } from "../../store/fetchActions";
 
 const InputTodo = (props) => {
   const dispatch = useDispatch();
@@ -29,7 +32,7 @@ const InputTodo = (props) => {
         style={styles.add}
         onPress={() => {
           dispatch(
-            addTodo({
+            addTodoFetch({
               id: uuid.v4(),
               descr: value,
               checked: false,
